@@ -1,0 +1,5 @@
+const offers=['micro','small','medium','half','full'];
+const expired=new Date()>new Date('2026-12-30T23:59:59+02:00');
+if(expired){document.querySelector('.specials').classList.add('expired');document.querySelector('.offer-hint').textContent='This summer special has ended. Ask the studio about current offers.';}
+document.querySelectorAll('.offer').forEach((button,index)=>button.addEventListener('click',()=>{if(!expired)window.location.href='/book?service='+offers[index];}));
+const dialog=document.querySelector('#lightbox');document.querySelectorAll('.piece').forEach(button=>button.addEventListener('click',()=>{const img=document.querySelector('#lightbox-image');img.src=button.dataset.image;img.alt=button.querySelector('img').alt;document.querySelector('#lightbox-title').textContent=button.dataset.title;dialog.showModal();}));document.querySelector('.close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
